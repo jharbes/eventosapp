@@ -47,6 +47,9 @@ public class EventoController {
 		Evento evento = eventoRepository.findByCodigo(codigo);
 		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
 		mv.addObject("evento", evento);
+
+		Iterable<Convidado> convidados = convidadoRepository.findByEvento(evento);
+		mv.addObject("convidados", convidados);
 		return mv;
 	}
 
@@ -55,7 +58,7 @@ public class EventoController {
 		Evento evento = eventoRepository.findByCodigo(codigo);
 		convidado.setEvento(evento);
 		convidadoRepository.save(convidado);
-		
+
 		return "redirect:/{codigo}";
 	}
 }
