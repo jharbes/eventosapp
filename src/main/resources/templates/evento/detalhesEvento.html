@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns:th="http://thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -21,6 +21,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             <p>Local: <span th:text="${evento.local}"></span></p>
             <p>Data: <span th:text="${evento.data}"></span></p>
             <p>Horário: <span th:text="${evento.horario}"></span></p>
+        </div>
+
+        <div th:if="${flashMessage != null}">
+            <div th:replace="mensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
         </div>
         
         <form method="post">

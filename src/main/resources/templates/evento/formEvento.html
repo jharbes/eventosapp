@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns:th="http://thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,6 +15,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
     <h1>Cadastro de Eventos</h1>
     <h3><a class="waves-effect waves-light btn" href="/eventos"><i class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h3>
+
+    <div th:if="${flashMessage != null}">
+        <div th:replace="mensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
+    </div>
+
     <form class="container" method="post">
             Nome: <input type="text" value="" name="nome"/>
 
