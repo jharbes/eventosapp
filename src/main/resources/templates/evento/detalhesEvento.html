@@ -22,6 +22,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             <p>Data: <span th:text="${evento.data}"></span></p>
             <p>Horário: <span th:text="${evento.horario}"></span></p>
         </div>
+        
+        <form method="post">
+            <label for="nomeConvidado">Nome do Convidado: </label><input type="text" name="nomeConvidado" id="nomeConvidado">
+            <label for="rg">RG do Convidado: </label><input type="text" name="rg" id="rg">
+            <button type="submit" class="waves-effect waves-light btn">Adicionar Convidado</button>
+        </form>
     </div>
 
 
