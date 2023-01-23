@@ -10,13 +10,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
     <title>EventosApp</title>
 </head>
 <body>
-    <h1>Detalhes do Evento</h1>
-	<h3><a class="waves-effect waves-light btn" href="/eventos"><i class="material-icons left">add_circle_outline</i>Lista de Eventos</a></h3>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">Detalhes do Evento</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn" href="/eventos"><i class="material-icons left">add_circle_outline</i>Lista de Eventos</a></li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+
     <div th:each="evento : ${evento}" class="container">
-        <div class="row">
+        <h4>Detalhes do Evento</h4>
+        <div class="row detalhesEvento">
             <p>Nome: <span th:text="${evento.nome}"></span></p>
             <p>Local: <span th:text="${evento.local}"></span></p>
             <p>Data: <span th:text="${evento.data}"></span></p>
@@ -27,24 +38,28 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             <div th:replace="mensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
         </div>
         
-        <form method="post">
-            <label for="nomeConvidado">Nome do Convidado: </label><input type="text" name="nomeConvidado" id="nomeConvidado">
-            <label for="rg">RG do Convidado: </label><input type="text" name="rg" id="rg">
-            <button type="submit" class="waves-effect waves-light btn">Adicionar Convidado</button>
-        </form>
+        <div class="container formConvidado">
+            <form method="post">
+                <label for="nomeConvidado">Nome do Convidado: </label><input type="text" name="nomeConvidado" id="nomeConvidado">
+                <label for="rg">RG do Convidado: </label><input type="text" name="rg" id="rg">
+                <button type="submit" class="waves-effect waves-light btn">Adicionar Convidado</button>
+            </form>
+        </div>
     </div>
 
-    <h5>Lista de Convidados: </h5>
-    <div class="container" th:each="convidado : ${convidados}">
-        <div class="row">
-            <div class="input-field col s6">
-                <p><span th:text="${convidado.nomeConvidado}"></span></p>
-            </div>
-            <div class="input-field col s3">
-                <p><span th:text="${convidado.rg}"></span></p>
-            </div>
-        </div>        
-    </div>
+    <table class="container tabelaConvidado">
+        <thead>
+            <tr>
+                <th>Nome do Convidado</th><th>RG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="convidado : ${convidados}">
+                <td><span th:text="${convidado.nomeConvidado}"></span></td>
+                <td><span th:text="${convidado.rg}"></span></td>
+            </tr>
+        </tbody>       
+    </table>
 
 
     <!--JavaScript at end of body for optimized loading-->
