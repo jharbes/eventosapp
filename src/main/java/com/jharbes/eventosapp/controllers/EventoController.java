@@ -38,12 +38,11 @@ public class EventoController {
 			attributes.addFlashAttribute("flashType", "danger");
 
 			return "redirect:/cadastrarEvento";
-		}
-		else {
+		} else {
 			eventoRepository.save(evento);
 			attributes.addFlashAttribute("flashMessage", "Evento adicionado com sucesso!");
 			attributes.addFlashAttribute("flashType", "success");
-			
+
 			return "redirect:/cadastrarEvento";
 		}
 	}
@@ -67,6 +66,13 @@ public class EventoController {
 		return mv;
 	}
 
+	@RequestMapping("/deletarEvento")
+	public String deletarEvento(long codigo) {
+		Evento evento = eventoRepository.findByCodigo(codigo);
+		eventoRepository.delete(evento);
+		return "redirect:/eventos";
+	}
+
 	@RequestMapping(value = "/{codigo}", method = RequestMethod.POST)
 	public String detalhesEventoPost(@PathVariable("codigo") long codigo, @Valid Convidado convidado,
 			BindingResult result, RedirectAttributes attributes) {
@@ -84,5 +90,16 @@ public class EventoController {
 
 			return "redirect:/{codigo}";
 		}
+	}
+
+	@RequestMapping("/deletarConvidado")
+	public String deletarConvidado(String rg) {
+		Convidado convidado = convidadoRepository.findByRg(rg);
+		convidadoRepository.delete(convidado);
+
+		Evento evento = convidado.getEvento();
+		long codigoLong = evento.getCodigo();
+		String codigo = "" + codigoLong;
+		return "redirect:/" + codigo;
 	}
 }
