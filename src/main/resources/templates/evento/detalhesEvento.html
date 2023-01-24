@@ -25,9 +25,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </nav>
     </header>
 
-    <div th:each="evento : ${evento}" class="container">
-        <h4>Detalhes do Evento</h4>
-        <div class="row detalhesEvento">
+    <div th:each="evento : ${evento}" class="">
+        <div class="row detalhesEvento container">
             <p>Nome: <span th:text="${evento.nome}"></span></p>
             <p>Local: <span th:text="${evento.local}"></span></p>
             <p>Data: <span th:text="${evento.data}"></span></p>
